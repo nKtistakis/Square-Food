@@ -1,7 +1,7 @@
 # Square-Food
 Backend Part of an online food ordering system
 
-##Instructions
+## Instructions
 Follow instructions in order to run project:
 ### Step 1
 Clone project and run the command "npm install" inside project's directory.
