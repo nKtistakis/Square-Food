@@ -16,9 +16,9 @@ export async function getMenu() {
       console.log("Will init menu...");
       await initMenu();
       results = await menuCollection.find().toArray();
-    }
+    } // If menu does not exist, js will create it with initMenu()
 
-    const menu = await results.reduce((categories, item) => {
+    const menu = results.reduce((categories, item) => {
       const group = categories[item.category] || [];
       group.push(item);
       categories[item.category] = group;

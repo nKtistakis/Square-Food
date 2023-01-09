@@ -22,7 +22,11 @@ router.get("/currencyConvert", async (req, res) => {
       req.query.from,
       req.query.amount
     );
-    res.send(response["result"].toString());
+    if (response["success"] == undefined || !response["success"]) {
+      res.sendStatus(500);
+    } else {
+      res.send(response["result"].toString());
+    }
   }
 });
 

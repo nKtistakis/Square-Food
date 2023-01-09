@@ -1,9 +1,11 @@
 import fetch from "node-fetch";
 import { Headers } from "node-fetch";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default async function convertCurrency(to, from, amount) {
   var myHeaders = new Headers();
-  myHeaders.append("apikey", "ZaHPXiQQCuSc8iGGG5lmn2ITeHwwIeXo");
+  myHeaders.append("apikey", process.env.API_KEY);
 
   var requestOptions = {
     method: "GET",
