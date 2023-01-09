@@ -1,0 +1,9 @@
+{
+    "address":"Aliakmonos 5",
+    "timestamp":"123098123",
+    "price":{
+        "amount":"5.56",
+        "currency":"EUR"
+    },
+    "items": ["Fries","Onion Rings"]
+}

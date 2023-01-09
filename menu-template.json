@@ -1,0 +1,64 @@
+{
+    "items":[
+        {
+            "name" : "Fries",
+            "desc" : "The usal fries",
+            "cost" : "2.9",
+            "category":"starters"
+        },
+         {
+            "name" : "Onion Rings",
+            "desc" : "Fried onion rings",
+            "cost" : "4",
+            "category":"starters"
+        },
+        {
+            "name" : "Ketchup",
+            "desc" : "",
+            "cost" : "0.6",
+            "category":"dips"
+        },
+         {
+            "name" : "Mustard",
+            "desc" : "",
+            "cost" : "0.6",
+            "category":"dips"
+        },
+        {   
+            "name" : "Hamburger", 
+            "desc" : "Contains: Beef Burger, Ketchup, Picles",
+            "cost" : "5",
+            "category":"mains"   
+        },
+        {
+            "name" : "Cheeseburger",
+            "desc" : "Contains: Beef Burger, Cheddar Cheese, Ketchup, Picles, Lettuce",
+            "cost" : "5.5",
+            "category":"mains"
+        },
+        {   
+            "name" : "Water", 
+            "desc" : "0.5L Water bottle",
+            "cost" : "0.5",
+            "category":"drinks"   
+        },
+        {
+            "name" : "Coca Cola",
+            "desc" : "0.3L can of Coke",
+            "cost" : "1.5",
+            "category":"drinks"
+        },
+        {
+            "name" : "Coca Cola Light",
+            "desc" : "0.3L can of Coke ligt",
+            "cost" : "1.5",
+            "category":"drinks"
+        },
+        {
+            "name" : "Coca Cola Zero",
+            "desc" : "0.3L can of Coke zero",
+            "cost" : "1.5",
+            "category":"drinks"
+        }
+    ]
+}

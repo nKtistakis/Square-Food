@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <% if(orders.length == 0) { %>
+    No orders at the moment
+    <%} %>  
+    <% for(var i=0; i < orders.length; i++) { %>
+    <form method="get" action="/restaurant">
+        <fieldset>  
+            <div>
+
+                <p>Will be delivered to: <%= orders[i]["address"] %></p>
+                <div>Items:
+                    <fieldset>
+                        <%= orders[i]["items"] %>
+                    </fieldset>
+                </div>
+                <p>Total cost was: <%= orders[i]["price"]["amount"] %> <%= orders[i]["price"]["currency"] %> and was placed at <%= orders[i]["timestamp"] %></p>
+            </div>
+            <br>
+            <% const id = orders[i]['_id'] %> 
+            <input type="submit" value="Complete Order" onclick="completeOrder('<%=id%>')">
+        </fieldset>
+    </form>
+<% } %> 
+</body>
+
+<script>
+
+async function completeOrder(id){
+    console.log(id);
+        await fetch("/restaurant/complete?id="+id, {
+        method: 'GET',
+    })
+    
+    }
+</script>
+</html>

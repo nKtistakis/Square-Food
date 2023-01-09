@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+</head>
+<body>
+    <h1>Please select desired items to add to your order</h1>
+    <form method='get' action="/">  
+        <fieldset>  
+            <% for(var category in items) { %>
+                <h2><%= category.charAt(0).toUpperCase() + category.slice(1); %></h2>
+                <% for(var j=0; j < items[category].length; j++) { %>
+                    <input type="button" id="1"
+                    value="<%= items[category][j].name%> - <%= items[category][j].cost%> &euro;" 
+                    onclick="return addItem('<%= items[category][j].name%>', '<%= items[category][j].cost%>');"><br> 
+
+                <% } %>        
+            <% } %>
+            <br>
+            <div style="display: flex; flex-direction: row;">
+                <input type="submit" value="Place Order" onclick="return handleSubmit();">
+                <b><p style="padding-left: 1cm;" id="totalAmount">0</p></b>
+                <p> &euro;</p>
+            </div>
+    </fieldset>  
+</form>
+
+<script type="text/javascript">
+    let items = []
+
+    function addItem(name, price){
+        items.push(name)
+        let totalAmount = document.getElementById("totalAmount")
+        let number = totalAmount.innerHTML;
+        number++
+        number--
+        //Converted it to number
+        number += parseFloat(price);
+        totalAmount.innerHTML = number;
+    } 
+
+
+    function handleSubmit(id){
+        if(document.getElementById("totalAmount").innerHTML == 0){
+            alert("Please select items")
+            return
+        }
+
+        fetch('/user/submit', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body:   JSON.stringify({ 
+        address: "Moraiti 22",
+        timestamp: "123",
+        price:{
+            amount:document.getElementById("totalAmount").innerHTML,
+             currency:"EUR"
+        },
+        items: items 
+        })
+    })
+    
+    }
+
+
+
+    </script>
+
+</html>
