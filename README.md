@@ -13,6 +13,10 @@ Make sure you have docker installed on your computer. If you are missing docker 
 Run the command "docker run -d -p 27017:27017 --name mongoContainer mongo:latest" in order to download the MongoDB image and mount in to a docker container and start it eventually.
 
 ### Step 4
+Create a .env file, following the .env.example file that exists in the project and add: 'ZaHPXiQQCuSc8iGGG5lmn2ITeHwwIeXo' as the API_KEY value.
+
+
+### Step 5
 After the database is running, type the command "npm start" and go to localhost:8080 in order to see the application.
 
 Now go ahead and add an order as a customer and view it as the restaurant owner. Please be free to provide any feedback.
