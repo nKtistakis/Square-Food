@@ -18,7 +18,6 @@ After the database is running, type the command "npm start" and go to localhost:
 Now go ahead and add an order as a customer and view it as the restaurant owner. Please be free to provide any feedback.
 
 Known issues:
-- Currently no multicurrency support
 - An empty order will redirect to home page
-- No "return to home" button
+- Order completion sometimes needs a refresh
 - Design needs rework
