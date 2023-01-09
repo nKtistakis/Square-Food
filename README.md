@@ -10,7 +10,7 @@ Clone project and run the command "npm install" inside project's directory.
 Make sure you have docker installed on your computer. If you are missing docker follow the instructions provided here: https://docs.docker.com/get-docker/
 
 ### Step 3
-Run the command "" in order to download the MongoDB image and mount in to a docker container and start it eventually.
+Run the command "docker run -d -p 27017:27017 --name mongoContainer mongo:latest" in order to download the MongoDB image and mount in to a docker container and start it eventually.
 
 ### Step 4
 After the database is running, type the command "npm start" and go to localhost:8080 in order to see the application.
