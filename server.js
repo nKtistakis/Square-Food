@@ -1,6 +1,9 @@
-const express = require("express");
+import express from "express";
+import bp from "body-parser";
+import userRouter from "./routes/user.js";
+import restaurantRouter from "./routes/restaurant.js";
+
 const app = express();
-const bp = require("body-parser");
 
 app.set("view engine", "ejs");
 
@@ -10,9 +13,6 @@ app.use(bp.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.render("index", { title: "Square Food" });
 });
-
-const userRouter = require("./routes/user");
-const restaurantRouter = require("./routes/restaurant");
 
 app.use("/user", userRouter);
 app.use("/restaurant", restaurantRouter);

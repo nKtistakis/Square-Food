@@ -7,6 +7,7 @@
     <title>Menu</title>
 </head>
 <body>
+    <a style="font-style: italic;" href="/"><-----RETURN</a>
     <h1>Please select desired items to add to your order</h1>
     <form method='get' action="/">  
         <fieldset>  
@@ -23,24 +24,65 @@
             <div style="display: flex; flex-direction: row;">
                 <input type="submit" value="Place Order" onclick="return handleSubmit();">
                 <b><p style="padding-left: 1cm;" id="totalAmount">0</p></b>
-                <p> &euro;</p>
+                <p id="currencySymbol" style="padding-right: 1cm;" > &euro;</p>
+                <select onchange="return changeCurrency()" id="currency" name="currency">
+                    <option value="&euro;EUR">EUR</option>
+                    <option value="&pound;GBP">GBP</option>
+                    <option value="&dollar;USD">USD</option>
+                    <option value="&yen;JPY">YEN</option>
+                  </select>
             </div>
     </fieldset>  
 </form>
 
 <script type="text/javascript">
     let items = []
+    let currentCurrency = 'EUR'
 
     function addItem(name, price){
         items.push(name)
         let totalAmount = document.getElementById("totalAmount")
-        let number = totalAmount.innerHTML;
-        number++
-        number--
-        //Converted it to number
-        number += parseFloat(price);
-        totalAmount.innerHTML = number;
-    } 
+        totalAmount.innerHTML = (parseFloat(totalAmount.innerHTML) + parseFloat(price)).toFixed(2);
+    }
+
+
+    async function changeCurrency(){
+
+        let currencySelector = document.getElementById("currency");
+        let totalAmount = document.getElementById("totalAmount");
+        const newSymbol = currencySelector.value.substr(0,1);
+        const to = currencySelector.value.substr(1);
+
+        const from = currentCurrency;
+
+        const amount = totalAmount.innerHTML;
+        
+        console.log(to,from,amount);
+
+        const url = `user/currencyConvert?to=${to}&from=${from}&amount=${amount}`
+        console.log(url);
+        fetch(url, {
+            method: 'GET',
+        }).then(function (response) {
+            return response.text();
+        }).then(function (convertedAmount) {
+            console.log("convertedAmount is " + convertedAmount);
+
+            
+            totalAmount.innerHTML = parseFloat(convertedAmount).toFixed(2);
+            currentCurrency = to;
+            document.getElementById("currencySymbol").innerHTML = newSymbol;
+
+        }).catch(function (err) {
+            // There was an error
+            console.warn('Something went wrong.', err);
+        });
+        
+
+
+        
+        
+    }
 
 
     function handleSubmit(id){
@@ -48,6 +90,9 @@
             alert("Please select items")
             return
         }
+        var currentdate = new Date(); 
+        const timestamp =currentdate.getHours() + ":" + currentdate.getMinutes()
+
 
         fetch('/user/submit', {
         method: 'POST',
@@ -55,11 +100,11 @@
         'Content-Type': 'application/json'
         },
         body:   JSON.stringify({ 
-        address: "Moraiti 22",
-        timestamp: "123",
+        address: "-Some address-",
+        timestamp: timestamp,
         price:{
             amount:document.getElementById("totalAmount").innerHTML,
-             currency:"EUR"
+            currency:currentCurrency
         },
         items: items 
         })

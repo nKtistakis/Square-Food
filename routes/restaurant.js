@@ -1,17 +1,20 @@
-const express = require("express");
+import express from "express";
+import { getOrders, completeOrder } from "./../database.js";
+
 const router = express.Router();
-var database = require("./../database");
 
 router.get("/", async (req, res) => {
-  let orders = await database.getOrders();
+  let orders = await getOrders();
   //   console.log(orders[0]["address"]);
+
   res.render("ordersDisplay", {
     orders: orders,
   });
 });
 
 router.get("/complete", (req, res) => {
-  database.completeOrder(req.query.id);
+  completeOrder(req.query.id);
+  res.send("ok");
 });
 
-module.exports = router;
+export default router;

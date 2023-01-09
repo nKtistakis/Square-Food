@@ -7,21 +7,21 @@
     <title>Document</title>
 </head>
 <body>
+    <a style="font-style: italic;" href="/"><-----RETURN</a><br>
     <% if(orders.length == 0) { %>
     No orders at the moment
     <%} %>  
     <% for(var i=0; i < orders.length; i++) { %>
-    <form method="get" action="/restaurant">
-        <fieldset>  
+    <form method="get" action="/restaurant" id="form"  name="form">
+        <fieldset> 
             <div>
-
                 <p>Will be delivered to: <%= orders[i]["address"] %></p>
                 <div>Items:
                     <fieldset>
                         <%= orders[i]["items"] %>
                     </fieldset>
                 </div>
-                <p>Total cost was: <%= orders[i]["price"]["amount"] %> <%= orders[i]["price"]["currency"] %> and was placed at <%= orders[i]["timestamp"] %></p>
+                <p>Total cost was: <%= orders[i]["price"]["amount"]%>  <%= orders[i]["price"]["currency"] %> and was placed at <%= orders[i]["timestamp"] %></p>
             </div>
             <br>
             <% const id = orders[i]['_id'] %> 
@@ -34,11 +34,9 @@
 <script>
 
 async function completeOrder(id){
-    console.log(id);
         await fetch("/restaurant/complete?id="+id, {
         method: 'GET',
-    })
-    
+        })
     }
 </script>
 </html>

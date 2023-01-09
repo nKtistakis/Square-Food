@@ -1,20 +1,29 @@
-const express = require("express");
-const router = express.Router();
-var database = require("./../database");
+import express from "express";
+import { getMenu, addOrder } from "./../database.js";
+import convertCurrency from "../fixerAPI.js";
 
-function log() {
-  console.log("FInaly--------------------------------");
-}
+const router = express.Router();
 
 router.get("/", async (req, res) => {
-  let results = await database.getMenu();
+  let results = await getMenu();
   res.render("menuDisplay", {
     items: results,
   });
 });
 
 router.post("/submit", (req, res) => {
-  database.addOrder(req.body);
+  addOrder(req.body);
 });
 
-module.exports = router;
+router.get("/currencyConvert", async (req, res) => {
+  if (req.query.amount != 0) {
+    const response = await convertCurrency(
+      req.query.to,
+      req.query.from,
+      req.query.amount
+    );
+    res.send(response["result"].toString());
+  }
+});
+
+export default router;

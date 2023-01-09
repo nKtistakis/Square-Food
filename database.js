@@ -1,13 +1,11 @@
-const { MongoClient } = require("mongodb");
-var mongodb = require("mongodb");
-// Replace the uri string with your MongoDB deployment's connection string.
+import { MongoClient } from "mongodb";
+import mongodb from "mongodb";
 
-// const mongo_host = process.env.MONGO_HOST || "127.0.0.1";
 const uri = "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 const dbName = "squarefood";
 
-async function getMenu() {
+export async function getMenu() {
   console.log("Returning menu");
   try {
     await client.connect();
@@ -51,7 +49,7 @@ async function initMenu() {
 
 //---------------------------------------------------------------------------------------------------------------------
 
-async function addOrder(order) {
+export async function addOrder(order) {
   console.log("Adding order");
 
   try {
@@ -70,7 +68,7 @@ async function addOrder(order) {
   return;
 }
 
-async function completeOrder(id) {
+export async function completeOrder(id) {
   console.log("Deleting order");
 
   try {
@@ -89,7 +87,7 @@ async function completeOrder(id) {
   }
 }
 
-async function getOrders() {
+export async function getOrders() {
   console.log("Returning orders");
   try {
     await client.connect();
@@ -105,4 +103,4 @@ async function getOrders() {
   }
 }
 
-module.exports = { getMenu, addOrder, getOrders, completeOrder };
+// export { getMenu, addOrder, getOrders, completeOrder };
